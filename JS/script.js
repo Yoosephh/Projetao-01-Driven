@@ -2,22 +2,28 @@ axios.defaults.headers.common['Authorization'] = 'aTbqbZrZrkTYLYdrTktudg1i';
 let dadosRecebidos;
 
 // thiago- testando funçao get:
+function gerarQuizesRecebidos(){
+    const containerQuizes = document.querySelector('.containerQuizes');
+    containerQuizes.innerHTML = '';
+    for( let i = 0; i < dadosRecebidos.length; i++ ){
+        containerQuizes.innerHTML +=    `<div class="quiz">
+                                            <img src= "${dadosRecebidos[i].image}" alt="">
+                                            <h3>${dadosRecebidos[i].title}</h3>
+                                        </div>`;
+    }
+}
+
 function respostaPromessaObterQuizes(res){
-    alert('promessa de obeter quizes cumprida');
-    console.log(res);
     dadosRecebidos = res.data;
     console.log(dadosRecebidos);
-    console.log(dadosRecebidos[0]);
-
-
-    const imagemQuizRecebido = document.querySelector('.quiz img');
-    console.log(imagemQuizRecebido);
-    imagemQuizRecebido.src = dadosRecebidos[0].image;
-
+    console.log('O que foi mandado acima são os dados recebidos');
+    gerarQuizesRecebidos();
 }
 
 let promessaObterQuizes = axios.get('https://mock-api.driven.com.br/api/vm/buzzquizz/quizzes');
 promessaObterQuizes.then(respostaPromessaObterQuizes)
+
+
 
 //thiago- fim teste função get
 
