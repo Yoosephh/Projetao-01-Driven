@@ -25,7 +25,12 @@ function respostaPromessaObterQuizes(res){
 let promessaObterQuizes = axios.get('https://mock-api.driven.com.br/api/vm/buzzquizz/quizzes');
 promessaObterQuizes.then(respostaPromessaObterQuizes)
 
-
+function esconderMostrar(){
+    const container2 = document.querySelector('.container2');
+    container2.classList.toggle('hidden');
+    const container = document.querySelector('.container');
+    container.classList.toggle('hidden');
+}
 
 //thiago- fim teste função get
 
