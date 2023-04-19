@@ -28,6 +28,7 @@ div{
 .quiz{
     width: 340px;
     height: 181px;
+    margin-bottom: 12px;
 }
 .containerQuizes{
     display: flex;
