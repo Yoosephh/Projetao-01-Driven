@@ -8,7 +8,9 @@ function gerarQuizesRecebidos(){
     for( let i = 0; i < dadosRecebidos.length; i++ ){
         containerQuizes.innerHTML +=    `<div class="quiz">
                                             <img src= "${dadosRecebidos[i].image}" alt="">
-                                            <h3>${dadosRecebidos[i].title}</h3>
+                                            <span>
+                                                <h3>${dadosRecebidos[i].title}</h3>
+                                            </span>
                                         </div>`;
     }
 }

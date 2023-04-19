@@ -41,8 +41,14 @@ div{
     height: 100%;
 }
 .quiz h3{
+    color: yellow;
+}
+.quiz span{
     position: absolute;
     bottom: 0px;
-    left: 60px;
-    color: yellow;
+    left: 0px;
+
+    width: 100%;
+    border: 1px solid palevioletred;
+    text-align: center;
 }
