@@ -35,3 +35,7 @@ div{
     flex-wrap: wrap;
     justify-content: space-between;
 }
+.quiz img{
+    width: 100%;
+    height: 100%;
+}
