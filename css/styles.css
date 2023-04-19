@@ -5,16 +5,23 @@ div{
     border: 1px solid black;
 }
 .container{
+    margin-top: 146px;
     width: 100%;
     display: flex;
     flex-direction: column;
 }
 .header{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
     height: 69px;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 77px;
+    
+    background-color: #EC362D;
+
 }
 .main{
     width: 1051px;
