@@ -71,63 +71,96 @@ const quizAleatorio =  [
                 }
             ]
         }
-]
-},
-{
-    title: "Quiz sobre historia",
-    image: "https://img.freepik.com/vetores-gratis/fundo-de-educacao-cientifica-de-mao-desenhada_23-2148499325.jpg?w=900&t=st=1681913176~exp=1681913776~hmac=51266ab1374d683143339fa979cabed38d7cc36d087725af084b5fd1479fddf9",
+    ]},
+    {
+    title: "Quiz sobre Harry Potter",
+    image: "https://s2.glbimg.com/kO4g-unF_GRhnipjcZhG4eipReQ=/0x0:924x511/924x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_1f551ea7087a47f39ead75f64041559a/internal_photos/bs/2023/S/A/ZCeyhwSgG6TcfiWgAcKQ/harry-potter-historias.jpg",
     questions: [ {
-        title : "1) Qual a unidade basica da vida?",
-        color : "green",
+        title : "1) Qual o verdadeiro nome do Lorde das Trevas, Valdemort?",
         answers: [
             {
-                text:"",
-                image: "",
-                isCorrectAnswer:
+            text:"Gellert Grindelwald",
+            image: "https://recreio.uol.com.br/media/_versions/legacy/2020/11/26/gellert-grindelwald-1225522_widexl.jpg",
+            isCorrectAnswer: false
             },{
-                text:"",
-                image: "",
-                isCorrectAnswer:
+            text:"Tom Marvolo Riddle",
+            image: "https://i.pinimg.com/originals/9f/98/c7/9f98c742174c22301ef75543a4fe158e.jpg",
+            isCorrectAnswer: true
             },{
-                text:"",
-                image: "",
-                isCorrectAnswer:
+            text:"Lucius Malfoy",
+            image: "https://static.wikia.nocookie.net/villains/images/a/ad/Lucius_Malfoy.jpg/revision/latest?cb=20110710180141",
+            isCorrectAnswer: false
             },{
-                text:"",
-                image: "",
-                isCorrectAnswer:
+            text:"Severus Snape",
+            image: "https://upload.wikimedia.org/wikipedia/en/b/b9/Ootp076.jpg",
+            isCorrectAnswer: false
             }
         ]
-    }]
-},
-{
-    title: "Quiz sobre ciencias",
-    image: "https://img.freepik.com/vetores-gratis/fundo-de-educacao-cientifica-de-mao-desenhada_23-2148499325.jpg?w=900&t=st=1681913176~exp=1681913776~hmac=51266ab1374d683143339fa979cabed38d7cc36d087725af084b5fd1479fddf9",
-    questions: [ {
-        title : "1) Qual a unidade basica da vida?",
-        color : "green",
+    }, {
+        title : "2) Qual casa de Hogwarts foi fundada por Salazar Slytherin?",
         answers: [
             {
-                text:"",
-                image: "",
-                isCorrectAnswer:
+            text:"Grifinoria",
+            image: "https://static.wikia.nocookie.net/harrypotter/images/b/b1/Gryffindor_ClearBG.png/revision/latest?cb=20201020015812&path-prefix=pt-br",
+            isCorrectAnswer: false
             },{
-                text:"",
-                image: "",
-                isCorrectAnswer:
+            text:"Corvinal",
+            image: "https://static.wikia.nocookie.net/harrypotter/images/0/07/Ravenclaw_%28S%C3%ADmbolo_Corvinal%29.png/revision/latest?cb=20170324224938&path-prefix=pt-br",
+            isCorrectAnswer: false
             },{
-                text:"",
-                image: "",
-                isCorrectAnswer:
+            text:"Lufa-Lufa",
+            image: "https://static.wikia.nocookie.net/harrypotter/images/0/06/Hufflepuff_ClearBG.png/revision/latest?cb=20200612012838&path-prefix=pt-br",
+            isCorrectAnswer: false
             },{
-                text:"",
-                image: "",
-                isCorrectAnswer:
+            text:"Sonserina",
+            image: "https://static.wikia.nocookie.net/harrypotter/images/0/00/Slytherin_ClearBG.png/revision/latest?cb=20200605032916&path-prefix=pt-br",
+            isCorrectAnswer: true
             }
         ]
-    }]
-}
-
+    }, {
+        title : "3) Qual o feitico usado para desarmar um oponente?",
+        answers: [
+            {
+            text:"Expelliarmus",
+            image: "https://i.pinimg.com/736x/20/fe/78/20fe7832d01c03515ca04ce6ee96a24c.jpg",
+            isCorrectAnswer: false
+            },{
+            text:"Wingardium Leviosa",
+            image: "https://static.vecteezy.com/ti/vetor-gratis/p3/10835581-silhueta-preta-de-penas-com-letras-wingardium-leviosa-ilustracaoial-vetor.jpg",
+            isCorrectAnswer: true
+            },{
+            text:"Accio",
+            image: "https://www.thegoldenstar.net/wp-content/uploads/2019/05/16624850_web1_harry-potter-web.jpg",
+            isCorrectAnswer: false
+            },{
+            text:"Crucio",
+            image: "https://cdn.shopify.com/s/files/1/0507/9688/8239/articles/unnamed_c493bd0d-17c5-4a98-9df7-ae664df12aa1.jpg?v=1676448145",
+            isCorrectAnswer: false
+            }
+        ]
+    }, {
+        title : "4) De qual familia da classe alta de bruxos Draco fazia parte?",
+        answers: [
+            {
+            text:"Familia Black",
+            image: "https://pm1.narvii.com/6287/2c3f7b49fae4ee4e052062bcb428b394cbf06ce0_hq.jpg",
+            isCorrectAnswer: false
+            },{
+            text:"Familia Weasley",
+            image: "https://observatoriodocinema.uol.com.br/wp-content/uploads/2019/11/fred-george-ginny-ron-hp-5-the-weasley-family-28758545-2500-1850-e1481969701848.jpg",
+            isCorrectAnswer: false
+            },{
+            text:"Familia Potter",
+            image: "https://criticalhits.com.br/wp-content/uploads/2021/01/74c95373cef8cf52d0aeb93c542a0ff2.jpg",
+            isCorrectAnswer: false
+            },{
+            text:"Familia Malfoy",
+            image: "https://epipoca.com.br/wp-content/uploads/2021/04/Helen-McCrory-em-Harry-Potter-1200x900.jpg",
+            isCorrectAnswer: true
+            },
+        ]}
+    ]
+},
 ]
 // vai ser chamado quando o usuario clicar para iniciar um quiz
 
