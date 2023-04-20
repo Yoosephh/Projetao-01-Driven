@@ -10,6 +10,7 @@ div{
     width: 100%;
     display: flex;
     flex-direction: column;
+    min-width: 1051px;
 }
 .header{
     z-index: 21;
@@ -73,12 +74,15 @@ div{
     border-radius: 50%;
 }
 .container2{
+    margin: 0 auto;
     margin-top: 69px;
     z-index: 20;
     width: 100%;
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
+    min-width: 759px;
 }
 .banner{
     height: 227px;
