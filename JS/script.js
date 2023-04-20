@@ -6,12 +6,13 @@ function gerarQuizesRecebidos(){
     const containerQuizes = document.querySelector('.containerQuizes');
     containerQuizes.innerHTML = '';
     for( let i = 0; i < dadosRecebidos.length; i++ ){
-        containerQuizes.innerHTML +=    `<div class="quiz" onclick="esconderMostrar()">
-                                            <img src= "${dadosRecebidos[i].image}" alt="">
-                                            <span>
-                                                <h3>${dadosRecebidos[i].title}</h3>
-                                            </span>
-                                        </div>`;
+        containerQuizes.innerHTML +=   
+        `<div class="quiz" onclick="esconderMostrar()">
+            <img src= "${dadosRecebidos[i].image}" alt="">
+            <span>
+                <h3>${dadosRecebidos[i].title}</h3>
+            </span>
+        </div>`;
     }
 }
 
