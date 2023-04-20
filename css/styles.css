@@ -123,3 +123,10 @@ div{
 .hidden{
     display: none;
 }
+.dadoOculto{
+    display: none;
+}
+.respostasPergunta img{
+    width: 100%;
+    height: 100%;
+}
