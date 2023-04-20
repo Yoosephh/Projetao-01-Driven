@@ -5,6 +5,7 @@ function gerarQuizesRecebidos(){
     const containerQuizes = document.querySelector('.containerQuizes');
     containerQuizes.innerHTML = '';
     for( let i = 0; i < dadosRecebidos.length; i++ ){
+<<<<<<< HEAD
         containerQuizes.innerHTML +=    `<div class="quiz" onclick="esconderMostrar(this)">
                                             <spam class="dadoOculto">${i}</spam>
                                             <img src= "${dadosRecebidos[i].image}" alt="">
@@ -12,6 +13,15 @@ function gerarQuizesRecebidos(){
                                                 <h3>${dadosRecebidos[i].title}</h3>
                                             </span>
                                         </div>`;
+=======
+        containerQuizes.innerHTML +=   
+        `<div class="quiz" onclick="esconderMostrar()">
+            <img src= "${dadosRecebidos[i].image}" alt="">
+            <span>
+                <h3>${dadosRecebidos[i].title}</h3>
+            </span>
+        </div>`;
+>>>>>>> 49059b4028e76921f40207da34ecfb8ac10ea47a
     }
 }
 
@@ -30,6 +40,13 @@ function esconderMostrar(tagClicada){
     container2.classList.toggle('hidden');
     const container = document.querySelector('.container');
     container.classList.toggle('hidden');
+<<<<<<< HEAD
+=======
+}
+
+
+//thiago- fim teste função get
+>>>>>>> 49059b4028e76921f40207da34ecfb8ac10ea47a
 
     distribuirOsDadosClicado(tagClicada);
 }
