@@ -5,7 +5,6 @@ function gerarQuizesRecebidos(){
     const containerQuizes = document.querySelector('.containerQuizes');
     containerQuizes.innerHTML = '';
     for( let i = 0; i < dadosRecebidos.length; i++ ){
-<<<<<<< HEAD
         containerQuizes.innerHTML +=    `<div class="quiz" onclick="esconderMostrar(this)">
                                             <spam class="dadoOculto">${i}</spam>
                                             <img src= "${dadosRecebidos[i].image}" alt="">
@@ -13,15 +12,6 @@ function gerarQuizesRecebidos(){
                                                 <h3>${dadosRecebidos[i].title}</h3>
                                             </span>
                                         </div>`;
-=======
-        containerQuizes.innerHTML +=   
-        `<div class="quiz" onclick="esconderMostrar()">
-            <img src= "${dadosRecebidos[i].image}" alt="">
-            <span>
-                <h3>${dadosRecebidos[i].title}</h3>
-            </span>
-        </div>`;
->>>>>>> 49059b4028e76921f40207da34ecfb8ac10ea47a
     }
 }
 
@@ -40,60 +30,56 @@ function esconderMostrar(tagClicada){
     container2.classList.toggle('hidden');
     const container = document.querySelector('.container');
     container.classList.toggle('hidden');
-<<<<<<< HEAD
-=======
-}
-
-
-//thiago- fim teste função get
->>>>>>> 49059b4028e76921f40207da34ecfb8ac10ea47a
-
     distribuirOsDadosClicado(tagClicada);
+
 }
+
+
 
 function distribuirOsDadosClicado(tagClicada){
     const numeroDoQuizTag = tagClicada.querySelector('.dadoOculto');
     let numeroDoQuiz = numeroDoQuizTag.innerHTML;
     numeroDoQuiz = Number(numeroDoQuiz);
-    console.log(typeof(numeroDoQuiz));
-    console.log(numeroDoQuiz);
+    quizClicado = dadosRecebidos[numeroDoQuiz];
+    console.log('O PROXIMO DADO É O QUIZ CLICADO');
+    console.log(quizClicado);
     const varQuizrenderizado = document.querySelector('.container2');
     varQuizrenderizado.innerHTML = 
         `
             <div class="header">
-            <h1>BuzzQuizz</h1>
+                <h1>BuzzQuizz</h1>
             </div>
-            <div class="banner"><h4>${dadosRecebidos[numeroDoQuiz].title}</h4></div>
+            <div class="banner"><h4>${quizClicado.title}</h4></div>
             <div class="feedPerguntas">
-            <div class="pergunta">
-                <div class="titlePergunta">${dadosRecebidos[numeroDoQuiz].questions[0].title}</div>
-                <div class="respostasPergunta">
-                    <div class="resposta"><img src="${dadosRecebidos[numeroDoQuiz].questions[0].answers[0].image}"/></div>
-                    <div class="resposta">${dadosRecebidos[numeroDoQuiz].questions[0].answers[1].image}</div>
-                    <div class="resposta">${dadosRecebidos[numeroDoQuiz].questions[0].answers[2].image}</div>
-                    <div class="resposta">${dadosRecebidos[numeroDoQuiz].questions[0].answers[3].image}</div>
-                </div>
-            </div>
-            <div class="pergunta">
-                <div class="titlePergunta"></div>
-                <div class="respostasPergunta">
-                    <div class="resposta"></div>
-                    <div class="resposta"></div>
-                    <div class="resposta"></div>
-                    <div class="resposta"></div>
-                </div>
-            </div>
-            <div class="pergunta">
-                <div class="titlePergunta"></div>
-                <div class="respostasPergunta">
-                    <div class="resposta"></div>
-                    <div class="resposta"></div>
-                    <div class="resposta"></div>
-                    <div class="resposta"></div>
-                </div>
-            </div>
+                
+                
+                
 
             </div>
 
         `;
+
+        let feedPerguntas = document.querySelector('.feedPerguntas');
+        feedPerguntas.innerHTML = "";
+        //console.log(quizClicado.questions.length);
+        for(let i = 0 ; i < quizClicado.questions.length; i ++){
+            feedPerguntas.innerHTML += 
+                `
+                    <div class="pergunta">
+                        <div class="titlePergunta">${quizClicado.questions[i].title}</div>
+                        <div class="respostasPergunta"></div>
+                    </div>
+                `;
+        }
+
+        let htmlRespostas = document.querySelectorAll('.respostasPergunta');
+        console.log(quizClicado.questions[0].answers.length);
+        for(let i = 0 ; i < htmlRespostas.length ; i++){
+            for(let j = 0 ; j < quizClicado.questions[i].answers.length ; j++){
+                htmlRespostas[i].innerHTML += `<div class="resposta">
+                                                    <div class='limitadorAltura'><img src="${quizClicado.questions[i].answers[j].image}"/></div>
+                                                    <h5>${quizClicado.questions[i].answers[j].text}</h5>
+                                                </div>`;
+            }
+        }
 }
