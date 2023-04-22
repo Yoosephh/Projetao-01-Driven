@@ -1,9 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
 *{
     box-sizing: border-box;
 }
-div{
-    border: 1px solid black;
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background: #E5E5E5;
 }
+
 .container{
     z-index: 10;
     margin-top: 146px;
@@ -17,15 +22,28 @@ div{
     position: fixed;
     top: 0;
     left: 0;
+    
     width: 100%;
     height: 69px;
+    
     display: flex;
     justify-content: center;
     align-items: center;
     
     background-color: #EC362D;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 
 }
+
+.header h1 {
+    width: 176px;
+    height: 43px;
+    font-weight: 700;
+    font-size: 37px;
+    line-height: 43px;
+    color: #FFFFFF;
+}
+
 .main{
     width: 1051px;
     margin: 0 auto;
@@ -133,4 +151,201 @@ div{
 .limitadorAltura{
     height: 175px;
     width: 100%;
+}
+
+
+/* ----------TELA 3 -----------------*/
+
+.tela3 {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 140px auto 27px;
+}
+
+.tela3 span {
+    font-weight: 700;
+    font-size: 23px;
+    margin-bottom: 27px;
+}
+
+.caixa-inicial {
+    width: 600px;
+    height: 256px;
+    background-color: #FFFFFF;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.05);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 27px;
+    padding: 15px 0;
+}
+
+.caixa-inicial input,
+.questionsBox input {
+    width: 564px;
+    height: 46px;
+    background-color: #FFFFFF;
+
+    font-weight: 400;
+    font-size: 19px;
+    
+    border: 1px solid #D1D1D1;
+    border-radius: 5px;
+
+    display: flex;
+    justify-content: center;    
+}
+
+.caixa-inicial input::placeholder,
+.questionsBox input::placeholder {
+    color: #BABABA;
+    font-style: italic;
+}
+
+.caixa-inicial input {
+    margin-top: 10px;
+}
+
+.botãoProsseguir {
+    width: 370px;
+    height: 54px;
+    color: #FFF5F4;
+    background-color: #EC362D;
+    border-radius: 15px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 87px;
+
+    cursor: pointer;
+}
+
+.questionsBox input {
+    margin-top: 14px;
+    
+}
+
+.questionsBox {
+    width: 600px;
+    height: auto;
+    background: #FFFFFF;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.05);
+
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-direction: column;
+    margin-bottom: 24px;
+    padding: 15px 0;
+    padding-top: 27px;
+    overflow-y: hidden;
+}
+
+.questionsBox span {
+    width: auto;
+    height: 23px;
+    font-weight: 700;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
+    
+    color: #000000;
+}
+
+.questionsBox ion-icon {
+    width: 26px;
+    height: 23px;
+    color: #000000;
+    margin-right: 24px;
+
+    cursor: pointer;
+}
+
+.questionsBox li {
+    height: auto;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    margin-bottom: 28px;
+}
+
+.questionsBox li div {
+    height: 30px;
+    display: flex;
+    flex-direction: column;
+}
+
+.questionsBox div:nth-child(1) {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    
+}
+
+.questionsBox ul.show {
+    height: auto;
+}
+
+.questionsBox ul {
+    width: 546px;
+    margin: auto;
+    height: 30px;
+    transition: height .3s linear;
+}
+
+.questionsBox ul.show li div {
+    height: auto;
+    margin-bottom: 20px;
+}
+
+.questionsBox ul.show.level {
+    height: 275px;
+}
+
+.myQuizz {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    border-radius: 5px;
+    position: relative;
+    cursor: pointer;
+}
+.myQuizz span{
+    height: 54px;
+    font-weight: 400;
+    font-size: 23px;
+    display: flex;
+    align-items: center;
+    color: #ffffff;
+    margin: 0px 10px 10px;
+    line-height: 27px;
+    position: absolute;
+}
+.myQuizz img {
+    height: 266px;
+    width: 500px;
+    border-radius: 5px;
+}
+
+.backHome {
+    width: 260px;
+    height: 52px;
+    border-radius: 15px;
+    background-color: transparent;
+    
+    font-weight: 400;
+    font-size: 21px;
+    color: #818181;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    cursor: pointer;
 }
