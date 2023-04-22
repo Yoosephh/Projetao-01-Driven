@@ -5,14 +5,13 @@ function gerarQuizesRecebidos(){
     const containerQuizes = document.querySelector('.containerQuizes');
     containerQuizes.innerHTML = '';
     for( let i = 0; i < dadosRecebidos.length; i++ ){
-        containerQuizes.innerHTML +=    
-        `<div class="quiz" onclick="distribuirOsDadosClicado(this)">
-            <spam class="dadoOculto">${i}</spam>
-            <img src= "${dadosRecebidos[i].image}" alt=""> 
-            <span>
-                <h3>${dadosRecebidos[i].title}</h3>
-            </span>
-        </div>`;
+        containerQuizes.innerHTML +=    `<div class="quiz" onclick="esconderMostrar(this)">
+                                            <spam class="dadoOculto">${i}</spam>
+                                            <img src= "${dadosRecebidos[i].image}" alt="">
+                                            <span>
+                                                <h3>${dadosRecebidos[i].title}</h3>
+                                            </span>
+                                        </div>`;
     }
 }
 
@@ -26,23 +25,24 @@ function respostaPromessaObterQuizes(res){
 let promessaObterQuizes = axios.get('https://mock-api.driven.com.br/api/vm/buzzquizz/quizzes');
 promessaObterQuizes.then(respostaPromessaObterQuizes)
 
-function esconderMostrar(){
+function esconderMostrar(tagClicada){
     const container2 = document.querySelector('.container2');
     container2.classList.toggle('hidden');
     const container = document.querySelector('.container');
     container.classList.toggle('hidden');
+    distribuirOsDadosClicado(tagClicada);
+
 }
 
+
+
 function distribuirOsDadosClicado(tagClicada){
-    esconderMostrar();
     const numeroDoQuizTag = tagClicada.querySelector('.dadoOculto');
     let numeroDoQuiz = numeroDoQuizTag.innerHTML;
-
+    numeroDoQuiz = Number(numeroDoQuiz);
     quizClicado = dadosRecebidos[numeroDoQuiz];
-
     console.log('O PROXIMO DADO É O QUIZ CLICADO');
     console.log(quizClicado);
-
     const varQuizrenderizado = document.querySelector('.container2');
     varQuizrenderizado.innerHTML = 
         `
@@ -73,7 +73,6 @@ function distribuirOsDadosClicado(tagClicada){
         }
 
         let htmlRespostas = document.querySelectorAll('.respostasPergunta');
-        console.log(quizClicado.questions[0].answers.length);
         for(let i = 0 ; i < htmlRespostas.length ; i++){
             for(let j = 0 ; j < quizClicado.questions[i].answers.length ; j++){
                 htmlRespostas[i].innerHTML += `<div class="resposta">
