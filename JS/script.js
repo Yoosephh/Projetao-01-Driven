@@ -1,5 +1,8 @@
 axios.defaults.headers.common['Authorization'] = 'aTbqbZrZrkTYLYdrTktudg1i';
 let dadosRecebidos;
+let promessaObterQuizes = axios.get('https://mock-api.driven.com.br/api/vm/buzzquizz/quizzes');
+promessaObterQuizes.then(respostaPromessaObterQuizes)
+let quantosAcertos;
 
 function gerarQuizesRecebidos(){
     const containerQuizes = document.querySelector('.containerQuizes');
@@ -16,6 +19,7 @@ function gerarQuizesRecebidos(){
     }
 }
 
+
 function respostaPromessaObterQuizes(res){
     dadosRecebidos = res.data;
     console.log(dadosRecebidos);
@@ -23,14 +27,16 @@ function respostaPromessaObterQuizes(res){
     gerarQuizesRecebidos();
 }
 
-let promessaObterQuizes = axios.get('https://mock-api.driven.com.br/api/vm/buzzquizz/quizzes');
-promessaObterQuizes.then(respostaPromessaObterQuizes)
+
 
 function esconderMostrar(){
-    const container2 = document.querySelector('.container2');
-    container2.classList.toggle('hidden');
-    const container = document.querySelector('.container');
-    container.classList.toggle('hidden');
+    document.querySelector('.container2').style.display= "flex";
+    document.querySelector('.main').style.display="none";
+}
+
+function retornaMenu() {
+    document.querySelector('.container2').style.display="none";
+    document.querySelector('.main').style.display="block"
 }
 
 function distribuirOsDadosClicado(tagClicada){
@@ -51,12 +57,7 @@ function distribuirOsDadosClicado(tagClicada){
             </div>
             <div class="banner"><h4>${quizClicado.title}</h4></div>
             <div class="feedPerguntas">
-                
-                
-                
-
             </div>
-
         `;
 
         let feedPerguntas = document.querySelector('.feedPerguntas');
@@ -64,22 +65,37 @@ function distribuirOsDadosClicado(tagClicada){
         //console.log(quizClicado.questions.length);
         for(let i = 0 ; i < quizClicado.questions.length; i ++){
             feedPerguntas.innerHTML += 
-                `
-                    <div class="pergunta">
+                    `<div class="pergunta">
                         <div class="titlePergunta">${quizClicado.questions[i].title}</div>
                         <div class="respostasPergunta"></div>
-                    </div>
-                `;
+                    </div>`;
         }
 
         let htmlRespostas = document.querySelectorAll('.respostasPergunta');
-        console.log(quizClicado.questions[0].answers.length);
+
         for(let i = 0 ; i < htmlRespostas.length ; i++){
             for(let j = 0 ; j < quizClicado.questions[i].answers.length ; j++){
-                htmlRespostas[i].innerHTML += `<div class="resposta">
-                                                    <div class='limitadorAltura'><img src="${quizClicado.questions[i].answers[j].image}"/></div>
-                                                    <h5>${quizClicado.questions[i].answers[j].text}</h5>
-                                                </div>`;
+                let abrev = quizClicado.questions[i].answers[j]
+                htmlRespostas[i].innerHTML += 
+                `<div class="resposta" onclick="revelaResposta(this)" data-answer="${abrev.isCorrectAnswer}">
+                    <div class='limitadorAltura'><img src="${abrev.image}" /></div>
+                    <h5>${abrev.text}</h5>
+                </div>`;
             }
         }
-}
+        varQuizrenderizado.innerHTML += `<button class="mainMenuBtn" onclick='retornaMenu()'> Voltar ao menu </button>`}
+
+        function revelaResposta(par) {
+            let qualResp = par.dataset.answer;
+
+            let resps = par.parentElement.querySelectorAll('.resposta');
+
+            for(let i = 0; i < resps.length; i++) {
+                if(resps[i].dataset.answer === "false") {
+                    resps[i].querySelector('h5').classList.add('respErrada')
+                } else if (resps[i].dataset.answer === "true") {
+                    resps[i].querySelector('h5').classList.add('respCerta')
+                }
+                if(resps[i] !== par) resps[i].style.opacity="0.3"
+            }
+          }
