@@ -8,6 +8,10 @@ div{
 body{
     background-color: #FAFAFA;
 
+body {
+    font-family: 'Roboto', sans-serif;
+    background: #E5E5E5;
+    padding-top: 69px;
 }
 
 .container{
@@ -136,7 +140,7 @@ h2{
     margin-top: 69px;
     z-index: 20;
     width: 100%;
-    display: flex;
+    display: none;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -193,7 +197,23 @@ h2{
     width: 100%;
 }
 
+.selecionada {
 
+}
+
+.respCerta{
+    color: #009C22;
+}
+.respErrada{
+    color: #FF4B4B;
+}
+.resposta > h5 {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 23px;
+}
 /* ----------TELA 3 -----------------*/
 
 .tela3 {
