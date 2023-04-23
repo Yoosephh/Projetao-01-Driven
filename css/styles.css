@@ -153,9 +153,8 @@ body {
     height: 175px;
     width: 100%;
 }
-
 .selecionada {
-
+    opacity: 0.3;
 }
 
 .respCerta{
@@ -170,6 +169,45 @@ body {
     font-weight: 700;
     font-size: 20px;
     line-height: 23px;
+    width: 100%;
+}
+
+.jogoAcabou {
+    display: none;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 150px;
+}
+.jogoAcabou button {
+    width: 260px;
+    height: 50px;
+    border: none;
+    border-radius: 15px;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 21px;
+    line-height: 25px;
+    align-items: center;
+    text-align: center;
+}
+.playAgain {
+    background-color: #EC362D;
+    color: #FFF5F4;
+}
+.mainMenuBtn {
+    color:#818181;
+    background-color: #E5E5E5;
+}
+.headFinal {
+    background-color: #EC362D;
+    color: #FFF5F4;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 23px;
+    line-height: 27px;
+    text-align: center;
 }
 /* ----------TELA 3 -----------------*/
 
