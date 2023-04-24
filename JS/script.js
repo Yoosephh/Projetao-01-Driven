@@ -8,6 +8,7 @@ let desempenho;
 let feedPerguntas;
 let varQuizrenderizado;
 let divScore;
+let quizSelecionado;
 
 function gerarQuizesRecebidos(res){
     dadosRecebidos = res.data;
@@ -17,11 +18,9 @@ function gerarQuizesRecebidos(res){
     for( let i = 0; i < dadosRecebidos.length; i++ ){
         containerQuizes.innerHTML +=    
         `<div class="quiz" onclick="distribuirOsDadosClicado(this)">
-            <spam class="dadoOculto">${i}</spam>
+            <span class="dadoOculto">${i}</span>
             <img src= "${dadosRecebidos[i].image}" alt=""> 
-            <span>
-                <h3>${dadosRecebidos[i].title}</h3>
-            </span>
+            <h3>${dadosRecebidos[i].title}</h3>
         </div>`;
     }
 }
@@ -40,6 +39,14 @@ function retornaMenu() {
     document.querySelector('.main').style.display="block";
     qntsAcertos = 0;
     perguntasRespondidas = 0;
+    feedPerguntas.innerHTML= "";
+    scrollIntoElement();
+}
+function reiniciaJogo() {
+    distribuirOsDadosClicado(quizSelecionado);
+    qntsAcertos = 0;
+    perguntasRespondidas = 0;
+    scrollIntoElement();
 }
 
 function distribuirOsDadosClicado(tagClicada){
@@ -55,7 +62,7 @@ function distribuirOsDadosClicado(tagClicada){
             <div class="header">
                 <h1>BuzzQuizz</h1>
             </div>
-            <div class="banner"><h4>${quizClicado.title}</h4></div>
+            <div class="banner" style="background-image: url('${quizClicado.image}')"><h4>${quizClicado.title}</h4></div>
             <div class="feedPerguntas">
             </div>
         `;
@@ -63,21 +70,29 @@ function distribuirOsDadosClicado(tagClicada){
     feedPerguntas = document.querySelector('.feedPerguntas');
     
     for(let i = 0 ; i < quizClicado.questions.length; i ++){
+        
+        const perguntaIndex = `pergunta-${i}`;
+        const perguntaIndexNext = `pergunta-${i+1}`;
+
         feedPerguntas.innerHTML += 
-                `<div class="pergunta">
-                    <div class="titlePergunta">${quizClicado.questions[i].title}</div>
-                    <div class="respostasPergunta"></div>
+                `<div class="pergunta ${perguntaIndex}">
+                    <div class="titlePergunta" style='background-color: ${quizClicado.questions[i].color}'>${quizClicado.questions[i].title}</div>
+                    <div class="respostasPergunta" data-index="${perguntaIndexNext}"></div>
                 </div>
                 `;
+        
     }
+    
 
     let htmlRespostas = document.querySelectorAll('.respostasPergunta');
-
+    
     for(let i = 0 ; i < htmlRespostas.length ; i++){
-        for(let j = 0 ; j < quizClicado.questions[i].answers.length ; j++){
-            let abrev = quizClicado.questions[i].answers[j]
+        const perguntaIndexNext = htmlRespostas[i].dataset.index;
+        const randomAnswers = quizClicado.questions[i].answers.sort(() => 0.5 - Math.random())
+        for(let j = 0 ; j < randomAnswers.length ; j++){
+            let abrev = randomAnswers[j]
             htmlRespostas[i].innerHTML += 
-            `<div class="resposta" onclick="revelaResposta(this)" data-answer="${abrev.isCorrectAnswer}">
+            `<div class="resposta" onclick="revelaResposta(this, '.${perguntaIndexNext}')" data-answer="${abrev.isCorrectAnswer}">
                 <div class='limitadorAltura'><img src="${abrev.image}" /></div>
                 <h5>${abrev.text}</h5>
             </div>`;
@@ -86,15 +101,14 @@ function distribuirOsDadosClicado(tagClicada){
     
     varQuizrenderizado.innerHTML += `
         <div class="jogoAcabou">
-        <button class="playAgain"> Jogar novamente</button>
+        <button class="playAgain" onclick ="reiniciaJogo()"> Jogar novamente</button>
         <button class="mainMenuBtn" onclick='retornaMenu()'> Voltar ao menu </button> </div>`
 
     divScore = document.querySelector(".score");
+    quizSelecionado = tagClicada;
 }
 
-
-
-function revelaResposta(par) {
+function revelaResposta(par, perguntaIndexNext) {
     
     let qualResp = par.dataset.answer;
 
@@ -110,30 +124,35 @@ function revelaResposta(par) {
         if(resps[i] !== par) resps[i].classList.add('selecionada')
     }
 
-    if(qualResp == "true") {
-        perguntasRespondidas++;
+    if(qualResp === "true") {
         qntsAcertos++;
-        jaAcabou();
-    } else if (qualResp == "false") {
-        perguntasRespondidas++
-        jaAcabou();
-    }}
+    }
+
+    perguntasRespondidas++
+    jaAcabou();
+
+    setTimeout(()=> {
+        scrollIntoElement(perguntaIndexNext)
+    },)
+    ;
+}
 
 function jaAcabou() {
-    console.log(feedPerguntas)
     if (perguntasRespondidas == quizClicado.questions.length) {
         document.querySelector('.jogoAcabou').style.display="flex"
-    
+        console.log(qntsAcertos)
         desempenho = Math.round(((qntsAcertos/perguntasRespondidas)*100))
 
         const divFinal = document.createElement("div");
         divFinal.classList.add("pergunta");
+        divFinal.classList.add("pergunta-final")
        
         const divTitleFinal = document.createElement('div');
         divFinal.appendChild(divTitleFinal)
         divTitleFinal.classList.add('headFinal');
     
         const divContentFinal = document.createElement('div');
+        divContentFinal.classList.add('divContent')
         divFinal.appendChild(divContentFinal);
     
         const divImgFinal = document.createElement('div');
@@ -143,7 +162,7 @@ function jaAcabou() {
         const divTextFinal = document.createElement('div');
         divContentFinal.appendChild(divTextFinal)
         divTextFinal.classList.add('textLevel');
-        
+
         feedPerguntas = document.querySelector('.feedPerguntas');
         
         feedPerguntas.append(divFinal);   
@@ -158,8 +177,19 @@ function jaAcabou() {
                 divTextFinal.innerHTML = `${quizClicado.levels[i].text}`;
                 console.log(quizClicado.levels[i].text)
                 console.log(`Seu desempenho foi de ${desempenho}%, que é maior que ${quizClicado.levels[i].minValue}`)
+                scrollIntoElement(".pergunta-final")   
                 return
             }
         }
     }
+}
+
+function scrollIntoElement(element = "html") {
+    const block = element  === "html" ? "start" : "end"; 
+    const selectedElement = document.querySelector(element);
+
+    selectedElement.scrollIntoView({
+        block,
+        behavior: "smooth", 
+    })
 }
