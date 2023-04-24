@@ -15,12 +15,12 @@ function createQuizz() {
             <span> Comece pelo começo </span>
 
             <div class = "caixa-inicial">
-                <input type = "text" placeholder = "Título do seu Quizz"></input>
-                <input type = "text" placeholder = "URL da imagem do seu quizz"></input>
-                <input type = "text" placeholder = "Quantidade de perguntas do quizz"></input>
-                <input type = "text" placeholder = "Quantidade de níveis do quizz"></input>
+                <input type = "text" placeholder = "Título do seu Quizz" data-test = "title-input"></input>
+                <input type = "text" placeholder = "URL da imagem do seu quizz" data-test = "img-input"></input>
+                <input type = "text" placeholder = "Quantidade de perguntas do quizz" data-test = "questions-amount-input"></input>
+                <input type = "text" placeholder = "Quantidade de níveis do quizz" data-test = "levels-amount-input"></input>
             </div>
-            <div class = "botãoProsseguir" onclick = "checkData()">
+            <div class = "botãoProsseguir" onclick = "checkData()" data-test = "go-create-questions">
                 <p>Prosseguir para criar perguntas</p>
             </div>
         </div>`
@@ -79,7 +79,7 @@ function createQuestions() {
         `<div class = "tela3">
             <span> Crie suas perguntas </span>
             <div class = "questionsContainer"></div>
-            <div class = "botãoProsseguir" onclick = "checkQuestions(${questions})">
+            <div class = "botãoProsseguir" onclick = "checkQuestions(${questions})" data-test = "go-create-levels">
                 <p>Prosseguir para criar níveis</p>
             </div>
         </div>`
@@ -96,40 +96,40 @@ function insertQuestions(questions) {
     for (let i = 1; i <= questions; i++) {
 
         screen.innerHTML += 
-        `<div class="questionsBox">
+        `<div class="questionsBox" data-test = "question-ctn">
             <ul class="pergunta${i}">
                 
                 <div class = "questionHeader">
                 <span>Pergunta ${i}</span>
-                <ion-icon name="create-outline" onclick="showQuestion(${i})"></ion-icon>
+                <ion-icon name="create-outline" onclick="showQuestion(${i})" data-test = "toggle"></ion-icon>
                 </div>
                 
                 <li>
-                    <input type="text" placeholder="Texto da pergunta" class="questionTitle">
-                    <input type="text" placeholder="Cor de fundo da pergunta" class="questionColor">
+                    <input type="text" placeholder="Texto da pergunta" class="questionTitle" data-test = "question-input">
+                    <input type="text" placeholder="Cor de fundo da pergunta" class="questionColor" data-test = "question-color-input">
                 </li>
                 
                 <li>
                     <span>Resposta correta</span>
-                    <input type="text" placeholder="Resposta correta" class="respostaCorreta">
-                    <input type="text" placeholder="URL da imagem" class="urlCorreta">
+                    <input type="text" placeholder="Resposta correta" class="respostaCorreta"  data-test = "correct-answer-input">
+                    <input type="text" placeholder="URL da imagem" class="urlCorreta" data-test = "correct-img-input">
                 </li>
                 
                 <li>
                     <span>Respostas incorretas</span>
                     <div>
-                        <input type="text" placeholder="Resposta incorreta 1" class="resposta1">
-                        <input type="text" placeholder="URL da imagem 1" class="URL1">
+                        <input type="text" placeholder="Resposta incorreta 1" class="resposta1" data-test="wrong-answer-input">
+                        <input type="text" placeholder="URL da imagem 1" class="URL1" data-test = "wrong-img-input">
                     </div>
                     
                     <div>
-                        <input type="text" placeholder="Resposta incorreta 2" class="resposta2">
-                        <input type="text" placeholder="URL da imagem 2" class="URL2">
+                        <input type="text" placeholder="Resposta incorreta 2" class="resposta2" data-test="wrong-answer-input">
+                        <input type="text" placeholder="URL da imagem 2" class="URL2" data-test = "wrong-img-input">
                     </div>
                     
                     <div>
-                        <input type="text" placeholder="Resposta incorreta 3" class="resposta3">
-                        <input type="text" placeholder="URL da imagem 3" class="URL3">
+                        <input type="text" placeholder="Resposta incorreta 3" class="resposta3" data-test = "wrong-answer-input">
+                        <input type="text" placeholder="URL da imagem 3" class="URL3" data-test = "wrong-img-input">
                     </div>
                 
                     </li>
@@ -313,7 +313,7 @@ function createLevels() {
     `<div class="tela3">
         <span>Agora, decida os níveis</span>
         <div class="levels"></div>
-        <div class="botãoProsseguir" onclick="checkLevels(${levels})">
+        <div class="botãoProsseguir" onclick="checkLevels(${levels})" data-test = "finish">
             <p>Finalizar Quizz</p>
         </div>
     </div>`;
@@ -327,16 +327,16 @@ function insertLevels(levels) {
 
     for (let i = 1; i <= levels; i++) {
         screen.innerHTML += 
-        `<div class="questionsBox">
+        `<div class="questionsBox" data-test = "level-ctn">
             <ul class="pergunta${i} nivel">
                 <div class = "levelHeader">
                     <span>Nível ${i}</span>
-                    <ion-icon name="create-outline" onclick="showQuestion(${i})"></ion-icon>
+                    <ion-icon name="create-outline" onclick="showQuestion(${i})" data-test="toggle"></ion-icon>
                 </div>
                 <div></div>
-                <input type="text" placeholder="Título do nível">
-                <input type="text" placeholder="% de acerto mínima">
-                <input type="text" placeholder="URL da imagem do nível">
+                <input type="text" placeholder="Título do nível" data-test="level-input">
+                <input type="text" placeholder="% de acerto mínima" data-test="level-percent-input">
+                <input type="text" placeholder="URL da imagem do nível" data-test="level-img-input">
                 <input type="text" placeholder="Descrição do nível">
             </ul>
         </div>`;
@@ -423,16 +423,16 @@ function createResume(quizzData) {
     contentQuizz.innerHTML = 
         `<div class="tela3">
             <span>Seu quizz está pronto!</span>
-            <div class="myQuizz" onclick = "getQuizz(${quizzData.id})">
+            <div class="myQuizz" onclick = "getQuizz(${quizzData.id})"  data-test="success-banner">
                     <img src="${quizzData.image}">
                     <div class="degrade2"></div>
                     <span>${quizzData.title}</span>
             </div>
-            <div class="botãoProsseguir" onclick = "getQuizz(${quizzData.id})">
+            <div class="botãoProsseguir" onclick = "getQuizz(${quizzData.id})" data-test="go-quiz">
                 <p>Acessar quizz</p>
             </div>
             <br>
-            <div class="backHome" onclick="home()">
+            <div class="backHome" onclick="home()" data-test="go-home">
                 <p>Voltar para home</p>
             </div>
         </div>`
