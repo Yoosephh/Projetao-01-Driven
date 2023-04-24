@@ -1,4 +1,4 @@
-let contentQuizz = document.querySelector('.containerQuizes');
+let contentQuizz = document.querySelector('.main');
 let title = '';
 let url = '';
 let questions = '';
