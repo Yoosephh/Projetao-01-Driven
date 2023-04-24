@@ -32,11 +32,14 @@ function checkData() {
     title = document.querySelector(".caixa-inicial :nth-child(1)").value;
     url = document.querySelector(".caixa-inicial :nth-child(2)").value;
     questions = document.querySelector(".caixa-inicial :nth-child(3)").value;
+    questions = Number(questions);
     levels = document.querySelector(".caixa-inicial :nth-child(4)").value;
 
     console.log(title);
     console.log(url);
     console.log(questions);
+    console.log(typeof(questions));
+
     console.log(levels);
 
     if (checkBasicData(title, url, questions, levels)){
@@ -134,7 +137,7 @@ function insertQuestions(questions) {
                 
                     </li>
             </ul>
-        </div>`
+        </div>`;
     }
 }
 

@@ -25,18 +25,29 @@
 
             </div>
     </div>
-    <div class="container2 hidden">
+    <div class="container2">
     </div>-->
 
     <div class="header">
-        <h1>BuzzQuizz</h1>
+        <h1 onclick="recarregar()">BuzzQuizz</h1>
     </div>
+    <div class="main">
+        <div class="divSeusQuizes">
+            <button onclick="createQuizz()" class="criar"> <p>Criar Quizz</p> </button>
 
-    <div class="containerQuizes">
-
+        </div>
+        <div class="divContainerTodosQuizes">
+            <div class="tituloSeusQuizes">
+                <span class="alinhador"><h2>Todos os Quizzes</h2></span>
+            </div>
+            <div class="containerQuizes"></div>
+        </div>
     </div>
-
-    <script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
+    <div class="container2">
+    </div>
+    
+    <sccript type="module" src="https://unpkg.com/ionicons@5.4.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule="" src="https://unpkg.com/ionicons@5.4.0/dist/ionicons/ionicons.js"></script>  
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="./JS/script.js"></script>
     <script src="./JS/criarQuiz.js"></script>

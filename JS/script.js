@@ -1,7 +1,17 @@
 axios.defaults.headers.common['Authorization'] = 'aTbqbZrZrkTYLYdrTktudg1i';
 let dadosRecebidos;
+let promessaObterQuizes = axios.get('https://mock-api.driven.com.br/api/vm/buzzquizz/quizzes');
+promessaObterQuizes.then(gerarQuizesRecebidos)
+let qntsAcertos = 0;
+let  qntsPerguntas = 0;
+let desempenho;
+let feedPerguntas;
+let varQuizrenderizado;
+let divScore;
 
-function gerarQuizesRecebidos(){
+function gerarQuizesRecebidos(res){
+    dadosRecebidos = res.data;
+
     const containerQuizes = document.querySelector('.containerQuizes');
     containerQuizes.innerHTML = '';
     for( let i = 0; i < dadosRecebidos.length; i++ ){
@@ -15,35 +25,31 @@ function gerarQuizesRecebidos(){
         </div>`;
     }
 }
-
-function respostaPromessaObterQuizes(res){
-    dadosRecebidos = res.data;
-    console.log(dadosRecebidos);
-    console.log('O que foi mandado acima são os dados recebidos');
-    gerarQuizesRecebidos();
+function recarregar(){
+    window.location.reload();
 }
 
-let promessaObterQuizes = axios.get('https://mock-api.driven.com.br/api/vm/buzzquizz/quizzes');
-promessaObterQuizes.then(respostaPromessaObterQuizes)
 
-function esconderMostrar(){
-    const container2 = document.querySelector('.container2');
-    container2.classList.toggle('hidden');
-    const container = document.querySelector('.container');
-    container.classList.toggle('hidden');
+function trocarTela(){
+    document.querySelector('.container2').style.display= "flex";
+    document.querySelector('.main').style.display="none";
+}
+
+function retornaMenu() {
+    document.querySelector('.container2').style.display="none";
+    document.querySelector('.main').style.display="block";
+    qntsAcertos = 0;
+    qntsPerguntas = 0;
 }
 
 function distribuirOsDadosClicado(tagClicada){
-    esconderMostrar();
+    trocarTela();
     const numeroDoQuizTag = tagClicada.querySelector('.dadoOculto');
     let numeroDoQuiz = numeroDoQuizTag.innerHTML;
 
     quizClicado = dadosRecebidos[numeroDoQuiz];
 
-    console.log('O PROXIMO DADO É O QUIZ CLICADO');
-    console.log(quizClicado);
-
-    const varQuizrenderizado = document.querySelector('.container2');
+    varQuizrenderizado = document.querySelector('.container2');
     varQuizrenderizado.innerHTML = 
         `
             <div class="header">
@@ -51,35 +57,111 @@ function distribuirOsDadosClicado(tagClicada){
             </div>
             <div class="banner"><h4>${quizClicado.title}</h4></div>
             <div class="feedPerguntas">
-                
-                
-                
-
             </div>
-
         `;
 
-        let feedPerguntas = document.querySelector('.feedPerguntas');
-        feedPerguntas.innerHTML = "";
-        //console.log(quizClicado.questions.length);
-        for(let i = 0 ; i < quizClicado.questions.length; i ++){
-            feedPerguntas.innerHTML += 
-                `
-                    <div class="pergunta">
-                        <div class="titlePergunta">${quizClicado.questions[i].title}</div>
-                        <div class="respostasPergunta"></div>
-                    </div>
-                `;
-        }
+    feedPerguntas = document.querySelector('.feedPerguntas');
+    console.log(feedPerguntas, "Aqui está, a primeira parte do console.log")
+    for(let i = 0 ; i < quizClicado.questions.length; i ++){
+        feedPerguntas.innerHTML += 
+                `<div class="pergunta">
+                    <div class="titlePergunta">${quizClicado.questions[i].title}</div>
+                    <div class="respostasPergunta"></div>
+                </div>`;
+    }
+    console.log(feedPerguntas, "está aqui! a segunda parte do console.log")
+    let htmlRespostas = document.querySelectorAll('.respostasPergunta');
 
-        let htmlRespostas = document.querySelectorAll('.respostasPergunta');
-        console.log(quizClicado.questions[0].answers.length);
-        for(let i = 0 ; i < htmlRespostas.length ; i++){
-            for(let j = 0 ; j < quizClicado.questions[i].answers.length ; j++){
-                htmlRespostas[i].innerHTML += `<div class="resposta">
-                                                    <div class='limitadorAltura'><img src="${quizClicado.questions[i].answers[j].image}"/></div>
-                                                    <h5>${quizClicado.questions[i].answers[j].text}</h5>
-                                                </div>`;
+    for(let i = 0 ; i < htmlRespostas.length ; i++){
+        for(let j = 0 ; j < quizClicado.questions[i].answers.length ; j++){
+            let abrev = quizClicado.questions[i].answers[j]
+            htmlRespostas[i].innerHTML += 
+            `<div class="resposta" onclick="revelaResposta(this)" data-answer="${abrev.isCorrectAnswer}">
+                <div class='limitadorAltura'><img src="${abrev.image}" /></div>
+                <h5>${abrev.text}</h5>
+            </div>`;
+        }
+    }
+    
+    varQuizrenderizado.innerHTML += `<div class="score"></div>
+    <div class="jogoAcabou">
+    <button class="playAgain"> Jogar novamente</button>
+    <button class="mainMenuBtn" onclick='retornaMenu()'> Voltar ao menu </button> </div>`
+
+    divScore = document.querySelector(".score");
+}
+
+
+
+function revelaResposta(par) {
+    
+    let qualResp = par.dataset.answer;
+
+    let resps = par.parentElement.querySelectorAll('.resposta');
+
+    for(let i = 0; i < resps.length; i++) {
+        resps[i].removeAttribute('onclick')
+        if(resps[i].dataset.answer === "false") {
+            resps[i].querySelector('h5').classList.add('respErrada')
+        } else if (resps[i].dataset.answer === "true") {
+            resps[i].querySelector('h5').classList.add('respCerta')
+        }
+        if(resps[i] !== par) resps[i].classList.add('selecionada')
+    }
+
+    if(qualResp == "true") {
+        qntsPerguntas++;
+        qntsAcertos++;
+        jaAcabou();
+    } else if (qualResp == "false") {
+        qntsPerguntas++
+        jaAcabou();
+    }}
+
+function jaAcabou() {
+    console.log(feedPerguntas)
+    if (qntsPerguntas == quizClicado.questions.length) {
+        feedPerguntas.innerHTML="e";
+        document.querySelector('.jogoAcabou').style.display="flex"
+    
+        desempenho = Math.round(((qntsAcertos/qntsPerguntas)*100))
+
+        const divFinal = document.createElement("div");
+        divFinal.classList.add("asuoihcasoiudhv");
+        
+       
+        const divTitleFinal = document.createElement('div');
+        divFinal.appendChild(divTitleFinal)
+        divTitleFinal.classList.add('headFinal');
+        divTitleFinal.setAttribute("id", "batata");
+    
+        const divContentFinal = document.createElement('div');
+        divFinal.appendChild(divContentFinal);
+    
+        const divImgFinal = document.createElement('div');
+        divContentFinal.appendChild(divImgFinal);
+        divImgFinal.classList.add('imgLevel');
+    
+        const divTextFinal = document.createElement('div');
+        divContentFinal.appendChild(divTextFinal)
+        divTextFinal.classList.add('textLevel');
+
+        feedPerguntas.appendChild(divFinal);
+        console.log(feedPerguntas);
+        
+        varQuizrenderizado.appendChild(feedPerguntas)
+        
+        for(let i = quizClicado.levels.length - 1; i >= 0 ; i--) {
+            if(desempenho >= quizClicado.levels[i].minValue){
+                divTitleFinal.innerHTML= `${desempenho}% de acerto: ${quizClicado.levels[i].title}`;
+                console.log(quizClicado.levels[i].title)
+    
+                divImgFinal.innerHTML= `<img src="${quizClicado.levels[i].image}" alt="">`;
+    
+                divTextFinal.innerHTML = `${quizClicado.levels[i].text}`;
+                console.log(quizClicado.levels[i].text)
+                console.log(`Seu desempenho foi de ${desempenho}%, que é maior que ${quizClicado.levels[i].minValue}`)
             }
         }
+    }
 }
