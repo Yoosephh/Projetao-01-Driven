@@ -125,7 +125,6 @@ function jaAcabou() {
 
         const divFinal = document.createElement("div");
         divFinal.classList.add("asuoihcasoiudhv");
-        
        
         const divTitleFinal = document.createElement('div');
         divFinal.appendChild(divTitleFinal)
