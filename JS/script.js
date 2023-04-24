@@ -3,7 +3,7 @@ let dadosRecebidos;
 let promessaObterQuizes = axios.get('https://mock-api.driven.com.br/api/vm/buzzquizz/quizzes');
 promessaObterQuizes.then(gerarQuizesRecebidos)
 let qntsAcertos = 0;
-let  qntsPerguntas = 0;
+let  perguntasRespondidas = 0;
 let desempenho;
 let feedPerguntas;
 let varQuizrenderizado;
@@ -39,7 +39,7 @@ function retornaMenu() {
     document.querySelector('.container2').style.display="none";
     document.querySelector('.main').style.display="block";
     qntsAcertos = 0;
-    qntsPerguntas = 0;
+    perguntasRespondidas = 0;
 }
 
 function distribuirOsDadosClicado(tagClicada){
@@ -61,15 +61,16 @@ function distribuirOsDadosClicado(tagClicada){
         `;
 
     feedPerguntas = document.querySelector('.feedPerguntas');
-    console.log(feedPerguntas, "Aqui está, a primeira parte do console.log")
+    
     for(let i = 0 ; i < quizClicado.questions.length; i ++){
         feedPerguntas.innerHTML += 
                 `<div class="pergunta">
                     <div class="titlePergunta">${quizClicado.questions[i].title}</div>
                     <div class="respostasPergunta"></div>
-                </div>`;
+                </div>
+                `;
     }
-    console.log(feedPerguntas, "está aqui! a segunda parte do console.log")
+
     let htmlRespostas = document.querySelectorAll('.respostasPergunta');
 
     for(let i = 0 ; i < htmlRespostas.length ; i++){
@@ -83,10 +84,10 @@ function distribuirOsDadosClicado(tagClicada){
         }
     }
     
-    varQuizrenderizado.innerHTML += `<div class="score"></div>
-    <div class="jogoAcabou">
-    <button class="playAgain"> Jogar novamente</button>
-    <button class="mainMenuBtn" onclick='retornaMenu()'> Voltar ao menu </button> </div>`
+    varQuizrenderizado.innerHTML += `
+        <div class="jogoAcabou">
+        <button class="playAgain"> Jogar novamente</button>
+        <button class="mainMenuBtn" onclick='retornaMenu()'> Voltar ao menu </button> </div>`
 
     divScore = document.querySelector(".score");
 }
@@ -110,29 +111,27 @@ function revelaResposta(par) {
     }
 
     if(qualResp == "true") {
-        qntsPerguntas++;
+        perguntasRespondidas++;
         qntsAcertos++;
         jaAcabou();
     } else if (qualResp == "false") {
-        qntsPerguntas++
+        perguntasRespondidas++
         jaAcabou();
     }}
 
 function jaAcabou() {
     console.log(feedPerguntas)
-    if (qntsPerguntas == quizClicado.questions.length) {
-        feedPerguntas.innerHTML="e";
+    if (perguntasRespondidas == quizClicado.questions.length) {
         document.querySelector('.jogoAcabou').style.display="flex"
     
-        desempenho = Math.round(((qntsAcertos/qntsPerguntas)*100))
+        desempenho = Math.round(((qntsAcertos/perguntasRespondidas)*100))
 
         const divFinal = document.createElement("div");
-        divFinal.classList.add("asuoihcasoiudhv");
+        divFinal.classList.add("pergunta");
        
         const divTitleFinal = document.createElement('div');
         divFinal.appendChild(divTitleFinal)
         divTitleFinal.classList.add('headFinal');
-        divTitleFinal.setAttribute("id", "batata");
     
         const divContentFinal = document.createElement('div');
         divFinal.appendChild(divContentFinal);
@@ -144,11 +143,10 @@ function jaAcabou() {
         const divTextFinal = document.createElement('div');
         divContentFinal.appendChild(divTextFinal)
         divTextFinal.classList.add('textLevel');
-
-        feedPerguntas.appendChild(divFinal);
-        console.log(feedPerguntas);
         
-        varQuizrenderizado.appendChild(feedPerguntas)
+        feedPerguntas = document.querySelector('.feedPerguntas');
+        
+        feedPerguntas.append(divFinal);   
         
         for(let i = quizClicado.levels.length - 1; i >= 0 ; i--) {
             if(desempenho >= quizClicado.levels[i].minValue){
@@ -160,6 +158,7 @@ function jaAcabou() {
                 divTextFinal.innerHTML = `${quizClicado.levels[i].text}`;
                 console.log(quizClicado.levels[i].text)
                 console.log(`Seu desempenho foi de ${desempenho}%, que é maior que ${quizClicado.levels[i].minValue}`)
+                return
             }
         }
     }
