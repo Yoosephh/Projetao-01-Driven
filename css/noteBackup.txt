@@ -108,3 +108,9 @@ const quizAleatorio
             ]
         }
     ]}
+
+
+
+                    <div class="divSeusQuizes">
+                    <button class="criar"> <p>Criar Quizz</p> </button>
+                </div>

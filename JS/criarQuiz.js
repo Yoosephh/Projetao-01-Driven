@@ -62,7 +62,7 @@ function checkBasicData(title, url, questions, levels) {
         return false;
     }
     
-    if(!(levels == 2 || levels == 1)){
+    if(!(levels >= 2)){
         console.log("Nível inválido");
         return false;
     }
@@ -104,7 +104,7 @@ function insertQuestions(questions) {
                 
                 <div class = "questionHeader">
                 <span>Pergunta ${i}</span>
-                <ion-icon name="create-outline" onclick="showQuestion(${i})"></ion-icon>
+                <ion-icon name="create" onclick="showQuestion(${i})"></ion-icon>
                 </div>
                 
                 <li>
@@ -137,7 +137,7 @@ function insertQuestions(questions) {
                 
                     </li>
             </ul>
-        </div>`
+        </div>`;
     }
 }
 

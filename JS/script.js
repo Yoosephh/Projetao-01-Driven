@@ -25,6 +25,9 @@ function gerarQuizesRecebidos(res){
         </div>`;
     }
 }
+function recarregar(){
+    window.location.reload();
+}
 
 
 function trocarTela(){
@@ -34,7 +37,7 @@ function trocarTela(){
 
 function retornaMenu() {
     document.querySelector('.container2').style.display="none";
-    document.querySelector('.main').style.display="block"
+    document.querySelector('.main').style.display="block";
     qntsAcertos = 0;
     qntsPerguntas = 0;
 }

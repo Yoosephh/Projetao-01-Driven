@@ -4,6 +4,7 @@
     box-sizing: border-box;
 }
 div{
+    border: 1px solid black;
 }
 body{
     background-color: #FAFAFA;
@@ -88,7 +89,7 @@ body {
 .containerQuizes{
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: center;
 }
 .quiz img{
     width: 100%;
@@ -447,4 +448,23 @@ h2{
     justify-content: center;
     margin: auto;
     cursor: pointer;
+}
+ion-icon{
+    color:#000000;
+    border: 1px solid #000000;
+}
+
+@media(max-width: 680px){
+    .main{
+        width: 100%;
+        
+    }
+    .tituloSeusQuizes{
+        display: flex;
+        justify-content: center;
+    }
+    .alinhador{
+        width: 340px;
+
+    }
 }
