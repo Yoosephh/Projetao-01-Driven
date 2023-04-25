@@ -5,10 +5,17 @@ let questions = '';
 let levels = '';
 let questionsStored = [];
 let levelsStored = [];
+let listaIDs = [];
+const listaIDsNome = "listaIDs";
 
 function createQuizz() {
-    const stringficado = JSON.stringify({batata: "elma Chips"})
-    localStorage.setItem("idQuizz", stringficado )
+    let retornolistaIDs = JSON.parse(localStorage.getItem(listaIDsNome));
+    if (retornolistaIDs !== null){
+        listaIDs = JSON.parse(localStorage.getItem(listaIDsNome));
+    }
+        
+    console.log(listaIDs);
+    
     contentQuizz.innerHTML = '';
 
     contentQuizz.innerHTML +=
@@ -305,7 +312,7 @@ function checkQuestionsInput(questionTitle, questionColor, respostaCorreta, resp
 
 function checkURL(url) {
     try {
-        console.log(url);
+        //console.log(url);
         new URL(url);
         return true;
     } catch(err) {
@@ -424,19 +431,18 @@ function sendQuizz() {
 }
 
 function callbackSendQuizz(ret) {
-    //const getArray = localStorage.getItem("arrayIds");
-    //const arrayIds = JSON.parse(getArray);
-    //arrayIds.push({id:ret.data.id});
-    //localStorage.setItem("arrayIds", JSON.stringify(arrayIds))
+    const ID = ret.data.id;
+    console.log("ID do quiz " + ID);
+
+    listaIDs.push(ID);
+    localStorage.setItem(listaIDsNome, JSON.stringify(listaIDs));
 
     createResume(ret.data);
-
-    //dadosRecebidos.push(ret.data)
 }
 
 function createResume(quizzData) {
     contentQuizz.innerHTML = '';
-    contentQuizz.innerHTML = 
+    contentQuizz.innerHTML += 
         `<div class="tela3">
             <span>Seu quizz está pronto!</span>
             <div class="myQuizz" onclick = "distribuirOsDadosClicado(${quizzData.id})"  data-test="success-banner">
@@ -448,7 +454,7 @@ function createResume(quizzData) {
                 <p>Acessar quizz</p>
             </div>
             <br>
-            <div class="backHome" onclick="home()" data-test="go-home">
+            <div class="backHome" onclick="fazerPage1()" data-test="go-home">
                 <p>Voltar para home</p>
             </div>
         </div>`
