@@ -38,9 +38,10 @@ function fazerPage1(){
 fazerPage1();
 
 function funcSeusQuizes(){
+    let divSeusQuizes = document.querySelector(".divSeusQuizes");
     console.log('EM BAIXO É LISTAIDSNOME');
     console.log(listaIDsNome);
-    let retornolistaIDs = JSON.parse(localStorage.getItem(listaIDsNome));
+    let retornolistaIDs = JSON.parse(localStorage.getItem("listaIDsNome"));
     if (retornolistaIDs !== null){
         listaIDs = JSON.parse(localStorage.getItem(listaIDsNome));
         divSeusQuizes.innerHTML = 
