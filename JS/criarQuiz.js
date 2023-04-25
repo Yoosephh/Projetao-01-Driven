@@ -33,14 +33,11 @@ function checkData() {
     title = document.querySelector(".caixa-inicial :nth-child(1)").value;
     url = document.querySelector(".caixa-inicial :nth-child(2)").value;
     questions = document.querySelector(".caixa-inicial :nth-child(3)").value;
-    questions = Number(questions);
     levels = document.querySelector(".caixa-inicial :nth-child(4)").value;
 
     console.log(title);
     console.log(url);
     console.log(questions);
-    console.log(typeof(questions));
-
     console.log(levels);
 
     if (checkBasicData(title, url, questions, levels)){
@@ -418,17 +415,14 @@ function sendQuizz() {
 }
 
 function callbackSendQuizz(ret) {
-    const getArray = localStorage.getItem("arrayIds");
-
-    const arrayIds = JSON.parse(getArray);
-    
-    arrayIds.push({id:ret.data.id});
-
-    localStorage.setItem("arrayIds", JSON.stringify(arrayIds))
+    //const getArray = localStorage.getItem("arrayIds");
+    //const arrayIds = JSON.parse(getArray);
+    //arrayIds.push({id:ret.data.id});
+    //localStorage.setItem("arrayIds", JSON.stringify(arrayIds))
 
     createResume(ret.data);
 
-    dadosRecebidos.push(ret.data)
+    //dadosRecebidos.push(ret.data)
 }
 
 function createResume(quizzData) {
