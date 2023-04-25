@@ -17,7 +17,7 @@ function gerarQuizesRecebidos(res){
     containerQuizes.innerHTML = '';
     for( let i = 0; i < dadosRecebidos.length; i++ ){
         containerQuizes.innerHTML +=    
-        `<div class="quiz" onclick="distribuirOsDadosClicado(this)">
+        `<div class="quiz" onclick="distribuirOsDadosClicado(${i})">
             <span class="dadoOculto">${i}</span>
             <img src= "${dadosRecebidos[i].image}" alt=""> 
             <h3>${dadosRecebidos[i].title}</h3>
@@ -51,10 +51,8 @@ function reiniciaJogo() {
 
 function distribuirOsDadosClicado(tagClicada){
     trocarTela();
-    const numeroDoQuizTag = tagClicada.querySelector('.dadoOculto');
-    let numeroDoQuiz = numeroDoQuizTag.innerHTML;
-
-    quizClicado = dadosRecebidos[numeroDoQuiz];
+    
+    quizClicado = dadosRecebidos[tagClicada];
 
     varQuizrenderizado = document.querySelector('.container2');
     varQuizrenderizado.innerHTML = 

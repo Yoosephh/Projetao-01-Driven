@@ -7,7 +7,8 @@ let questionsStored = [];
 let levelsStored = [];
 
 function createQuizz() {
-    console.log("função create quizz");
+    const stringficado = JSON.stringify({batata: "elma Chips"})
+    localStorage.setItem("idQuizz", stringficado )
     contentQuizz.innerHTML = '';
 
     contentQuizz.innerHTML +=
@@ -417,16 +418,25 @@ function sendQuizz() {
 }
 
 function callbackSendQuizz(ret) {
+    const getArray = localStorage.getItem("arrayIds");
+
+    const arrayIds = JSON.parse(getArray);
+    
+    arrayIds.push({id:ret.data.id});
+
+    localStorage.setItem("arrayIds", JSON.stringify(arrayIds))
+
     createResume(ret.data);
+
+    dadosRecebidos.push(ret.data)
 }
 
 function createResume(quizzData) {
     contentQuizz.innerHTML = '';
-
     contentQuizz.innerHTML = 
         `<div class="tela3">
             <span>Seu quizz está pronto!</span>
-            <div class="myQuizz" onclick = "getQuizz(${quizzData.id})"  data-test="success-banner">
+            <div class="myQuizz" onclick = "distribuirOsDadosClicado(${quizzData.id})"  data-test="success-banner">
                     <img src="${quizzData.image}">
                     <div class="degrade2"></div>
                     <span>${quizzData.title}</span>

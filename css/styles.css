@@ -8,7 +8,6 @@
 body {
     font-family: 'Roboto', sans-serif;
     background: #E5E5E5;
-
 }
 .alinhador {
     margin:12px;
@@ -51,6 +50,9 @@ body {
 .main{
     width: 1051px;
     margin: 0 auto;
+    margin-top: 69px;
+    display: flex;
+    flex-direction: column;
 }
 .divSeusQuizes{
     width: 100%;
@@ -61,6 +63,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-top: 75px;
 }
 .criar{
     width: 151px;
