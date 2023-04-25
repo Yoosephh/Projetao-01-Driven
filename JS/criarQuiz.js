@@ -33,14 +33,11 @@ function checkData() {
     title = document.querySelector(".caixa-inicial :nth-child(1)").value;
     url = document.querySelector(".caixa-inicial :nth-child(2)").value;
     questions = document.querySelector(".caixa-inicial :nth-child(3)").value;
-    questions = Number(questions);
     levels = document.querySelector(".caixa-inicial :nth-child(4)").value;
 
     console.log(title);
     console.log(url);
     console.log(questions);
-    console.log(typeof(questions));
-
     console.log(levels);
 
     if (checkBasicData(title, url, questions, levels)){
@@ -245,6 +242,8 @@ function checkQuestionsData(questions) {
             };
 
             questionsStored.push(questionsList);
+        } else{
+            console.log("Pergunta inválida:" + i);
         }
     }
 
@@ -259,37 +258,44 @@ function checkQuestionsData(questions) {
 function checkQuestionsInput(questionTitle, questionColor, respostaCorreta, resposta1, resposta2, resposta3, URLCorreta, URL1, URL2, URL3) {
     
     if (!(questionTitle.length >= 20)) {
+        console.log('Título inválido');
         return false;
     }
 
     let hex = /^#[0-9A-F]{6}$/i;
 
     if(!(hex.test(questionColor))) {
+        console.log('Cor inválida');
         return false;
     }
         
     if(!(respostaCorreta !== '' && (resposta1 !== '' || resposta2 !== '' || resposta3 !== ''))) {
+        console.log('Resposta inválida');
         return false;
     }
 
     if(!(checkURL(URLCorreta))) {
+        console.log('URL inválida')
         return false;
     }
     
     if(resposta1 !== ''){
         if(!(checkURL(URL1))){
+            console.log('Resposta 1: URL inválida');
             return false;
         }
     }
 
     if(resposta2 !== ''){
         if(!(checkURL(URL2))){
+            console.log('Resposta 2: URL inválida');
             return false;
         }
     }
 
     if(resposta3 !== ''){
         if(!(checkURL(URL3))){
+            console.log('Resposta 3: URL inválida');
             return false;
         }
     }
@@ -418,17 +424,17 @@ function sendQuizz() {
 }
 
 function callbackSendQuizz(ret) {
-    const getArray = localStorage.getItem("arrayIds");
+    //const getArray = localStorage.getItem("arrayIds");
 
-    const arrayIds = JSON.parse(getArray);
+    //const arrayIds = JSON.parse(getArray);
     
-    arrayIds.push({id:ret.data.id});
+    //arrayIds.push({id:ret.data.id});
 
-    localStorage.setItem("arrayIds", JSON.stringify(arrayIds))
+    //localStorage.setItem("arrayIds", JSON.stringify(arrayIds))
 
     createResume(ret.data);
 
-    dadosRecebidos.push(ret.data)
+    //dadosRecebidos.push(ret.data)
 }
 
 function createResume(quizzData) {

@@ -496,10 +496,10 @@ color: #484848;
     margin: auto;
     cursor: pointer;
 }
-ion-icon{
+/*ion-icon{
     color:#000000;
     border: 1px solid #000000;
-}
+}*/
 
 @media(max-width: 680px){
     .main{
