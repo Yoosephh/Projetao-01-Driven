@@ -425,11 +425,8 @@ function sendQuizz() {
 
 function callbackSendQuizz(ret) {
     //const getArray = localStorage.getItem("arrayIds");
-
     //const arrayIds = JSON.parse(getArray);
-    
     //arrayIds.push({id:ret.data.id});
-
     //localStorage.setItem("arrayIds", JSON.stringify(arrayIds))
 
     createResume(ret.data);

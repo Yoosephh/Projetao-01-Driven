@@ -10,6 +10,31 @@ let varQuizrenderizado;
 let divScore;
 let quizSelecionado;
 
+let divBody = document.querySelector('.divBody');
+function fazerPage1(){
+    divBody.innerHTML = `<div class="header">
+                            <h1 onclick="recarregar()">BuzzQuizz</h1>
+                            </div>
+                            <div class="main">
+                            <div class="divSeusQuizes">
+                                <button onclick="createQuizz()" class="criar"> <p>Criar Quizz</p> </button>
+
+                            </div>
+                            <div class="divContainerTodosQuizes">
+                                <div class="tituloSeusQuizes">
+                                    <span class="alinhador"><h2>Todos os Quizzes</h2></span>
+                                </div>
+                                <div class="containerQuizes"></div>
+                            </div>
+                            </div>
+                            <div class="container2">
+                            </div>
+                        `;
+
+    console.log('OLHA O BODY EMBAIXO');
+    console.log(divBody);
+}
+fazerPage1();
 function gerarQuizesRecebidos(res){
     dadosRecebidos = res.data;
 
