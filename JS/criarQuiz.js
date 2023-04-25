@@ -1,4 +1,6 @@
 let contentQuizz = document.querySelector('.containerQuizes');
+let contentQuizz2 = document.querySelector('.divSeusQuizes');
+
 let title = '';
 let url = '';
 let questions = '';
@@ -7,6 +9,7 @@ let questionsStored = [];
 let levelsStored = [];
 
 function createQuizz() {
+    contentQuizz2.classList.toggle('hidden');
     console.log("função create quizz");
     contentQuizz.innerHTML = '';
 
