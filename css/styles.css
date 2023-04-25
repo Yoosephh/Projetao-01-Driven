@@ -496,6 +496,16 @@ color: #484848;
     margin: auto;
     cursor: pointer;
 }
+.vermelho{
+    color: red;
+}
+.containerSeusQuizes{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+   gap: 15px;
+
+}
 /*ion-icon{
     color:#000000;
     border: 1px solid #000000;

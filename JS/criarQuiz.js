@@ -13,7 +13,8 @@ function createQuizz() {
     if (retornolistaIDs !== null){
         listaIDs = JSON.parse(localStorage.getItem(listaIDsNome));
     }
-        
+      
+    console.log('OLHA EM BAIXO OS LISTAIDS');
     console.log(listaIDs);
     
     contentQuizz.innerHTML = '';

@@ -35,6 +35,51 @@ function fazerPage1(){
     console.log(divBody);
 }
 fazerPage1();
+
+function funcSeusQuizes(){
+    console.log('EM BAIXO É LISTAIDSNOME');
+    console.log(listaIDsNome);
+    let retornolistaIDs = JSON.parse(localStorage.getItem(listaIDsNome));
+    if (retornolistaIDs !== null){
+        listaIDs = JSON.parse(localStorage.getItem(listaIDsNome));
+        divSeusQuizes.innerHTML = 
+            `
+            <div class="tituloComBotao">
+                <span ><h2>Seus Quizzes</h2></span>
+                <ion-icon class="vermelho" onclick="createQuizz()" name="add-circle"></ion-icon>
+                
+            </div>
+            <div class="containerSeusQuizes"></div>
+
+            `;
+        let containerSeusQuizes = document.querySelector('.containerSeusQuizes');
+        containerSeusQuizes = "";
+
+        for( let i = 0 ; i < dadosRecebidos.length ; i++ ){
+
+
+            for( let j = 0 ; j < listaIDs.length ; j++ ){
+
+                if(dadosRecebidos[i].id == listaIDs[j]){
+
+                    containerSeusQuizes.innerHTML +=     `<div class="quiz" onclick="distribuirOsDadosClicado(${i})">
+                                                        <span class="dadoOculto">${i}</span>
+                                                        <img src= "${dadosRecebidos[i].image}" alt=""> 
+                                                        <h3>${dadosRecebidos[i].title}</h3>
+                                                    </div>`;
+
+
+                }
+
+            }
+            
+
+        }
+
+    }
+
+}
+funcSeusQuizes();
 function gerarQuizesRecebidos(res){
     dadosRecebidos = res.data;
 
