@@ -17,6 +17,7 @@ function fazerPage1(){
                             </div>
                             <div class="main">
                             <div class="divSeusQuizes">
+                                <p> Você não criou nenhum quiz ainda :( </p>
                                 <button onclick="createQuizz()" class="criar"> <p>Criar Quizz</p> </button>
 
                             </div>
@@ -70,14 +71,9 @@ function funcSeusQuizes(){
 
 
                 }
-
             }
-            
-
         }
-
     }
-
 }
 funcSeusQuizes();
 function gerarQuizesRecebidos(res){
@@ -201,7 +197,7 @@ function revelaResposta(par, perguntaIndexNext) {
 
     setTimeout(()=> {
         scrollIntoElement(perguntaIndexNext)
-    },)
+    }, 2000)
     ;
 }
 
