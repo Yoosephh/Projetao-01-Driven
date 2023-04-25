@@ -1,10 +1,4 @@
-<<<<<<< HEAD
-let contentQuizz = document.querySelector('.containerQuizes');
-let contentQuizz2 = document.querySelector('.divSeusQuizes');
-
-=======
 let contentQuizz = document.querySelector('.main');
->>>>>>> dad34a1bf1c46ee7351c543a7a84a40f1f5d771e
 let title = '';
 let url = '';
 let questions = '';
@@ -13,13 +7,8 @@ let questionsStored = [];
 let levelsStored = [];
 
 function createQuizz() {
-<<<<<<< HEAD
-    contentQuizz2.classList.toggle('hidden');
-    console.log("função create quizz");
-=======
     const stringficado = JSON.stringify({batata: "elma Chips"})
     localStorage.setItem("idQuizz", stringficado )
->>>>>>> dad34a1bf1c46ee7351c543a7a84a40f1f5d771e
     contentQuizz.innerHTML = '';
 
     contentQuizz.innerHTML +=
